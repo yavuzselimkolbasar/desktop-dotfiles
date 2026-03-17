@@ -3,7 +3,7 @@
 My personal NixOS configuration. GNOME on NixOS stable with flakes, focused on performance and security.
  
 <!-- screenshots -->
- ![screenshot](screenshot.png)
+ ![screenshot](Screenshot.png)
 ---
  
 ## Stack
