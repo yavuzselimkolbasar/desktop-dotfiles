@@ -45,7 +45,7 @@ My personal NixOS configuration. GNOME on NixOS stable with flakes, focused on p
  
 ## Installation
  
-A custom ISO is provided that handles installation automatically. **It has not been tested yet — use at your own risk.**
+A custom ISO is provided that handles installation automatically. **It has not been tested yet use at your own risk.**
  
 If you want to apply the config manually, fill in `host.nix` from the provided template and run:
  
