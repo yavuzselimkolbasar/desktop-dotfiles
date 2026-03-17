@@ -25,7 +25,7 @@ My personal NixOS configuration. GNOME on NixOS stable with flakes, focused on p
 ```
 .
 ├── flake.nix
-├── host.nix              # Machine-specific config (copy from host.nix.template)
+├── host.nix              # Machine-specific config
 ├── modules/
 │   ├── core.nix          # Users, locale, networking, boot
 │   ├── desktop.nix       # GNOME, GDM, Flatpak, SCX scheduler
