@@ -55,7 +55,7 @@
     appindicator
     just-perfection
     quick-settings-audio-panel
-    clipboard-indicator        # fixed: was incorrectly `gnomeExtensions.clipboard-indicator`
+    clipboard-indicator     
   ]);
 
   # ============================================================

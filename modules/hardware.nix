@@ -35,7 +35,7 @@
   };
 
   # =========================================================
-  # SECURE BOOT (lanzaboote)
+  # SECURE BOOT
   # =========================================================
   boot.lanzaboote = {
     enable    = true;
@@ -44,12 +44,9 @@
 
   # =========================================================
   # HIDDEN BOOT MENU
-  # This service works around a race condition where NixOS
-  # rewrites loader.conf after boot — the repeated sed+echo
-  # is intentional and should not be simplified.
   # =========================================================
   systemd.services.hidden-boot-menu = {
-    description = "Set systemd-boot menu to hidden mode";
+    description = "Systemd hidden mode";
     wantedBy    = [ "multi-user.target" ];
     after       = [ "local-fs.target" ];
     serviceConfig = {
@@ -68,7 +65,6 @@
 
   # =========================================================
   # FILESYSTEMS
-  # disko generates /, /home, /boot — only the NTFS mount lives here
   # =========================================================
   fileSystems = lib.optionalAttrs (hostConfig.ntfsUuid != null) {
     "/disks/${hostConfig.ntfsLabel}" = {
@@ -133,7 +129,6 @@
     wireplumber.enable = true;
   };
 
-  # PCI paths below are machine-specific — update if hardware changes
   environment.etc."wireplumber/wireplumber.conf.d/50-disable-outputs.conf".text = ''
     monitor.alsa.rules = [
       {

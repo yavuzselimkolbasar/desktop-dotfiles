@@ -18,7 +18,7 @@
   ];
 
   # ==================================================
-  # PORTALS & SESSION
+  # PORTALS
   # ==================================================
   xdg.portal.extraPortals          = [ pkgs.xdg-desktop-portal-gnome ];
   xdg.portal.config.common.default = "gnome";
@@ -43,7 +43,6 @@
     scx.full
     xwayland
   ] ++ lib.optionals hostConfig.dualBoot [
-    # Reboot directly into Windows — bound to <Ctrl><Alt>w in gnome.nix
     (pkgs.writeShellScriptBin "winboot" ''
       #!/bin/sh
       BOOTNUM=$(efibootmgr | grep -i "Windows Boot Manager" | grep '\*' | grep -oP 'Boot\K[0-9]+')

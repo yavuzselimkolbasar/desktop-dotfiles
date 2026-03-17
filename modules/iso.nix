@@ -10,19 +10,15 @@
   isoImage.makeEfiBootable     = true;
   isoImage.makeUsbBootable     = true;
   image.fileName = "nixos-installer.iso"; 
-  # Bundle the entire config into the ISO so the installer can copy it
   isoImage.contents = [{
     source = ../.;
     target = "/nixos-config";
   }];
 
   # ── Boot ─────────────────────────────────────────────────────────────────
-  # Use standard boot on live media — lanzaboote is for the installed system
   boot.loader.systemd-boot.enable = lib.mkForce true;
   boot.loader.timeout = lib.mkForce 3;
   boot.kernelPatches = lib.mkForce [];
-  # Use standard kernel on the ISO to keep image size reasonable.
-  # The installed system will use the CachyOS kernel from kernel.nix.
   boot.kernelPackages             = lib.mkForce pkgs.linuxPackages_latest;
 
   # ── Networking ───────────────────────────────────────────────────────────
@@ -47,7 +43,6 @@
   ];
 
   # ── Install script ───────────────────────────────────────────────────────
-  # Running `install` from any terminal starts the guided installer.
   environment.etc."install".source = ../installer/install.sh;
   environment.etc."install".mode   = "0755";
 

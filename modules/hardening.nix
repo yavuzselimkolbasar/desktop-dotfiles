@@ -33,7 +33,7 @@
   };
 
   # ===========================================================================
-  # SYSTEMD — global resource limits
+  # SYSTEMD
   # ===========================================================================
   systemd.settings.Manager = {
     DefaultLimitNOFILE      = 1048576;
@@ -43,9 +43,6 @@
     DefaultIOAccounting     = true;
   };
 
-  # ===========================================================================
-  # SYSTEMD — per-service sandboxing
-  # ===========================================================================
   systemd.services.nextdns.serviceConfig = {
     CapabilityBoundingSet   = [ "CAP_NET_ADMIN" "CAP_NET_BIND_SERVICE" "CAP_NET_RAW" ];
     AmbientCapabilities     = [ "CAP_NET_ADMIN" "CAP_NET_BIND_SERVICE" "CAP_NET_RAW" ];

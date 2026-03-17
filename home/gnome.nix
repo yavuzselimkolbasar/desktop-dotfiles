@@ -5,7 +5,6 @@ let
   pinnedApps = "[{'id': <'org.gnome.Nautilus.desktop'>}, {'id': <'org.gnome.Console.desktop'>}, {'id': <'com.github.tchx84.Flatseal.desktop'>}, {'id': <'termius-app.desktop'>}, {'id': <'com.vscodium.codium.desktop'>}, {'id': <'io.ente.auth.desktop'>}, {'id': <'com.bitwarden.desktop.desktop'>}, {'id': <'com.brave.Browser.desktop'>}, {'id': <'com.discordapp.Discord.desktop'>}, {'id': <'steam.desktop'>}, {'id': <'page.kramo.Cartridges.desktop'>}, {'id': <'io.github.kolunmi.Bazaar.desktop'>}, {'id': <'com.obsproject.Studio.desktop'>}]";
 in
 {
-  # Restore ArcMenu pinned-apps after GNOME starts (aa{ss} type can't be set via dconf.settings)
   systemd.user.services.arcmenu-pinned-apps = {
     Unit = {
       Description = "Restore ArcMenu pinned apps";
@@ -112,7 +111,7 @@ in
       cycle-panels-backward        = [ "@as []" ];
       cycle-windows                = [ "<Super>Tab" ];
       cycle-windows-backward       = [ "<Shift><Super>Tab" ];
-      maximize                     = [ "@as []" ]; # handled by tilingshell
+      maximize                     = [ "@as []" ]; 
       minimize                     = [ "@as []" ];
       move-to-monitor-down         = [ "@as []" ];
       move-to-monitor-left         = [ "@as []" ];
@@ -143,21 +142,19 @@ in
       switch-to-workspace-right    = [ "@as []" ];
       switch-windows               = [ "<Alt>Tab" ];
       switch-windows-backward      = [ "<Shift><Alt>Tab" ];
-      unmaximize                   = [ "@as []" ]; # handled by tilingshell
+      unmaximize                   = [ "@as []" ]; 
     };
 
-    # ── Keybindings: Mutter ────────────────────────────────────────────────
+    # ── Keybindings: ────────────────────────────────────────────────
     "org/gnome/mutter/keybindings" = {
       toggle-tiled-left  = [ "@as []" ];
       toggle-tiled-right = [ "@as []" ];
-      # tilingshell overrides these at runtime to <Super>Left / <Super>Right
     };
 
     "org/gnome/mutter/wayland/keybindings" = {
       restore-shortcuts = [ "@as []" ];
     };
-
-    # ── Keybindings: Shell ─────────────────────────────────────────────────
+    
     "org/gnome/shell/keybindings" = {
       focus-active-notification = [ "@as []" ];
       screenshot                = [ "Print" ];
@@ -172,7 +169,6 @@ in
       toggle-quick-settings     = [ "@as []" ];
     };
 
-    # ── Keybindings: Media & Custom ────────────────────────────────────────
     "org/gnome/settings-daemon/plugins/media-keys" = {
       custom-keybindings = [
         "/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom0/"
@@ -227,7 +223,7 @@ in
       two-finger-scrolling-enabled = true;
     };
 
-    # ── Power & Session ────────────────────────────────────────────────────
+    # ── Power ────────────────────────────────────────────────────
     "org/gnome/settings-daemon/plugins/power" = {
       sleep-inactive-ac-type = "nothing";
     };
@@ -403,15 +399,11 @@ in
       trans-use-dynamic-opacity            = true;
       window-preview-animation-time        = 100;
       window-preview-title-position        = "TOP";
-      # Monitor-specific — update IDs if you change hardware
       panel-anchors           = ''{"GSM-309NTWG6J321":"MIDDLE","LEN-URHK8GKL":"MIDDLE"}'';
       panel-positions         = ''{"GSM-309NTWG6J321":"BOTTOM","LEN-URHK8GKL":"BOTTOM"}'';
       panel-element-positions = ''{"GSM-309NTWG6J321":[{"element":"showAppsButton","visible":false,"position":"centered"},{"element":"activitiesButton","visible":false,"position":"centered"},{"element":"leftBox","visible":true,"position":"centerMonitor"},{"element":"taskbar","visible":true,"position":"centerMonitor"},{"element":"centerBox","visible":true,"position":"centerMonitor"},{"element":"rightBox","visible":true,"position":"stackedBR"},{"element":"dateMenu","visible":true,"position":"stackedBR"},{"element":"systemMenu","visible":true,"position":"stackedBR"},{"element":"desktopButton","visible":false,"position":"stackedBR"}],"LEN-URHK8GKL":[{"element":"showAppsButton","visible":false,"position":"centered"},{"element":"activitiesButton","visible":false,"position":"centered"},{"element":"leftBox","visible":true,"position":"centerMonitor"},{"element":"taskbar","visible":true,"position":"centerMonitor"},{"element":"centerBox","visible":true,"position":"centerMonitor"},{"element":"rightBox","visible":true,"position":"stackedBR"},{"element":"dateMenu","visible":true,"position":"stackedBR"},{"element":"systemMenu","visible":true,"position":"stackedBR"},{"element":"desktopButton","visible":false,"position":"stackedBR"}]}'';
     };
 
-    # ── ArcMenu ────────────────────────────────────────────────────────────
-    # pinned-apps is set via systemd.user.services.arcmenu-pinned-apps above
-    # because it requires aa{ss} GVariant type which dconf.settings can't express
     "org/gnome/shell/extensions/arcmenu" = {
       arcmenu-hotkey                     = [ "Super_L" ];
       arcmenu-hotkey-overlay-key-enabled = true;
@@ -455,8 +447,6 @@ in
       snap-assist-sync-layout          = true;
       window-use-custom-border-color   = false;
       selected-layouts                 = [ [ "Layout 1" "Layout 1" ] [ "Layout 1" "Layout 1" ] ];
-      # tilingshell overrides mutter keybindings at runtime
-      # <Super>Left/Right = tile, <Super>Up/Down = maximize/unmaximize
       layouts-json = ''[{"id":"Layout 1","tiles":[{"x":0,"y":0,"width":0.50625,"height":1,"groups":[1]},{"x":0.50625,"y":0,"width":0.49375,"height":1,"groups":[1]}]},{"id":"696433","tiles":[{"x":0,"y":0,"width":0.49375,"height":1,"groups":[1]},{"x":0.49375,"y":0,"width":0.5062499999999999,"height":0.5,"groups":[2,1]},{"x":0.49375,"y":0.5,"width":0.5062499999999999,"height":0.4999999999999999,"groups":[2,1]}]},{"id":"746584","tiles":[{"x":0,"y":0,"width":0.5,"height":0.5,"groups":[1,2]},{"x":0.5,"y":0,"width":0.5000000000000006,"height":0.5,"groups":[3,1]},{"x":0,"y":0.5,"width":0.5,"height":0.5,"groups":[2,1]},{"x":0.5,"y":0.5,"width":0.5000000000000006,"height":0.5,"groups":[3,1]}]}]'';
     };
 

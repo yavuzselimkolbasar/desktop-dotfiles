@@ -6,14 +6,11 @@ in
 {
   # =========================================================
   # POWER PROFILES DAEMON
-  # Drives the Performance / Balanced / Power Saver toggle
-  # in GNOME Settings → Power. Manages CPU governor itself.
   # =========================================================
   services.power-profiles-daemon.enable = true;
 
   # =========================================================
-  # NVIDIA — mirror active GNOME profile to GPU powermizer
-  # Performance → max clocks  |  Balanced → adaptive  |  Power Saver → auto
+  # NVIDIA
   # =========================================================
   systemd.services.nvidia-profile-sync = lib.mkIf isNvidia {
     description = "Sync NVIDIA powermizer with power-profiles-daemon";
@@ -67,8 +64,7 @@ in
   };
 
   # =========================================================
-  # GAMEMODE — extra boost on top when a game is actually running
-  # Add  gamemoderun %command%  in Steam launch options
+  # GAMEMODE
   # =========================================================
   programs.gamemode = {
     enable = true;
@@ -82,13 +78,10 @@ in
     };
   };
 
-  # =========================================================
-  # IRQ BALANCING — always on, spreads interrupts across cores
-  # =========================================================
   services.irqbalance.enable = true;
 
   # =========================================================
-  # SYSCTL — network + pipe improvements, zero noise/power cost
+  # SYSCTL
   # =========================================================
   boot.kernel.sysctl = {
     "fs.pipe-max-size"      = 8388608;

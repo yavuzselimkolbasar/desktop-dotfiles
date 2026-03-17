@@ -26,7 +26,7 @@ in
   boot.kernelPackages = pkgs.cachyosKernels.linuxPackages-cachyos-latest;
 
   # ===========================================================================
-  # KERNEL PARAMS  (single source of truth — hardware.nix has no kernelParams)
+  # KERNEL PARAMS 
   # ===========================================================================
   boot.kernelParams = [
     "quiet"
@@ -75,7 +75,7 @@ in
       REISERFS_FS      = lib.mkForce no;
       JFS_FS           = lib.mkForce no;
 
-      # ── GPU — nvidia is out-of-tree, kill all in-tree GPU drivers ─────────
+      # ── GPU ─────────
       DRM_NOUVEAU      = lib.mkForce no;
       DRM_I915         = lib.mkForce no;
       DRM_AMDGPU       = lib.mkForce no;
@@ -83,7 +83,7 @@ in
       DRM_VIRTIO_GPU   = lib.mkForce no;
       DRM_AST          = lib.mkForce no;
 
-      # ── Network — RTL8125 via r8169, no wifi ──────────────────────────────
+      # ── Network ──────────────────────────────
       R8169            = lib.mkForce module;
       E1000E           = lib.mkForce no;
       IGB              = lib.mkForce no;
